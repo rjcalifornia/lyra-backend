@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Enums;
+
+use ReflectionClass;
+
+abstract class PermisosEnum
+{
+    // Permisos de Identificacion y Autorizacion de Personas
+    const VER_LISTA_USUARIOS = 'VER_LISTA_USUARIOS';
+    const CREAR_USUARIO = 'CREAR_USUARIO';
+    const EDITAR_DATOS_USUARIO = 'EDITAR_DATOS_USUARIO';
+    const CAMBIAR_CARGO_USUARIO = 'CAMBIAR_CARGO_USUARIO';
+    const CAMBIAR_ROLE_USUARIO = 'CAMBIAR_ROLE_USUARIO';
+    const CAMBIAR_CREDENCIALES_USUARIO = 'CAMBIAR_CREDENCIALES_USUARIO';
+    const DESACTIVAR_USUARIO = 'DESACTIVAR_USUARIO';
+    const VER_LISTA_USUARIOS_INACTIVOS = 'VER_LISTA_USUARIOS_INACTIVOS';
+    const ACTIVAR_USUARIO = 'ACTIVAR_USUARIO';
+    
+    const VER_LISTA_ROLES = 'VER_LISTA_ROLES';
+    const CREAR_ROLE = 'CREAR_ROLE';
+    const EDITAR_DATOS_ROLE = 'EDITAR_DATOS_ROLE';
+    const DESACTIVAR_ROLE = 'DESACTIVAR_ROLE';
+    const AGREGAR_PERMISOS_ROLE = 'AGREGAR_PERMISOS_ROLE';
+    const REVOCAR_PERMISOS_ROLE = 'REVOCAR_PERMISOS_ROLE';
+    
+   
+
+    // Permisos de Identificacion y Autorizacion de Dispositivos
+    const VER_LISTA_DISPOSITIVOS = 'VER_LISTA_DISPOSITIVOS';
+    const REGISTRAR_DISPOSITIVO = 'REGISTRAR_DISPOSITIVO';
+    const VER_DETALLE_DISPOSITIVO = 'VER_DETALLE_DISPOSITIVO';
+    const DESACTIVAR_DISPOSITIVO = 'DESACTIVAR_DISPOSITIVO';
+    const ELIMINAR_DISPOSITIVO = 'ELIMINAR_DISPOSITIVO';
+
+    // Permisos de Catalogos
+    const VER_LISTA_REGISTROS_CATALOGO = 'VER_LISTA_REGISTROS_CATALOGO';
+    const CREAR_REGISTRO_CATALOGO = 'CREAR_REGISTRO_CATALOGO';
+    const EDITAR_REGISTRO_CATALOGO = 'EDITAR_REGISTRO_CATALOGO';
+    const ELIMINAR_REGISTRO_CATALOGO = 'ELIMINAR_REGISTRO_CATALOGO';
+
+    // Permisos de Centros de Votacion
+    const VER_LISTA_CENTROS = "VER_LISTA_CENTROS";
+    const REGISTRAR_CENTROS = "REGISTRAR_CENTROS";
+    const EDITAR_CENTROS = "EDITAR_CENTROS";
+    const ELIMINAR_CENTROS = "ELIMINAR_CENTROS";
+
+    // Permisos de Solicitud
+    const REGISTAR_VOTOS = 'REGISTAR_VOTOS';
+    const VER_DETALLE_ACTA = 'VER_DETALLE_ACTA';
+    const VER_RESULTADOS = 'VER_RESULTADOS';
+    const GENERAR_REPORTE = 'GENERAR_REPORTE';
+   
+
+    // Permisos Vigilantes
+    const VER_LISTA_VIGILANTES = 'VER_LISTA_VIGILANTES';
+    const VER_LISTA_VIGILANTES_DESACTIVADOS = 'VER_LISTA_VIGILANTES_DESACTIVADOS';
+    const REGISTRAR_VIGILANTE = 'REGISTRAR_VIGILANTE';
+    const EDITAR_DATOS_VIGILANTE = 'EDITAR_DATOS_VIGILANTE';
+    const DESACTIVAR_VIGILANTE = 'DESACTIVAR_VIGILANTE';
+    const ACTIVAR_VIGILANTE = 'ACTIVAR_VIGILANTE';
+    
+  
+    
+
+    /**
+     * Retorna todas las constantes de esta clase, es decir, todos los permisos
+     */
+    public static function getPermisos()
+    {
+        $reflectionClass = new ReflectionClass(static::class);
+        return $reflectionClass->getConstants();
+    }
+}
+
