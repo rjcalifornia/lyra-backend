@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('volunteer', function (Blueprint $table) {
-            $table->id();
+        Schema::create('devices', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('voting_center_id');
+            $table->string('auth_code');
+            $table->boolean('validated')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }
