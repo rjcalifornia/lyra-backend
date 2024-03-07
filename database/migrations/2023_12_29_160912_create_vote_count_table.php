@@ -12,7 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vote_count', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedInteger('party_id');
+            $table->unsignedInteger('electoral_act_id');
+            $table->integer('votes');
+            $table->unsignedBigInteger('user_creates');
+            $table->unsignedBigInteger('user_modifies')->nullable();
+            $table->foreign('user_creates')->references('id')->on('users');
+            $table->foreign('user_modifies')->references('id')->on('users');
             $table->timestamps();
         });
     }

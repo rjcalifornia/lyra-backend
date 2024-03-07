@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedInteger('municipality_id');
             $table->boolean('active')->nullable();
+            $table->unsignedBigInteger('user_creates');
+            $table->unsignedBigInteger('user_modifies')->nullable();
+            $table->foreign('user_creates')->references('id')->on('users');
+            $table->foreign('user_modifies')->references('id')->on('users');
             $table->timestamps();
         });
     }

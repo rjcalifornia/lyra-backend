@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('auth_code');
             $table->boolean('validated')->nullable();
             $table->boolean('active')->nullable();
+            $table->unsignedBigInteger('user_creates');
+            $table->unsignedBigInteger('user_modifies')->nullable();
+            $table->foreign('user_creates')->references('id')->on('users');
+            $table->foreign('user_modifies')->references('id')->on('users');
             $table->timestamps();
         });
     }

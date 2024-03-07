@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('electoral_acts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_creates');
+            $table->unsignedBigInteger('user_modifies')->nullable();
+            $table->foreign('user_creates')->references('id')->on('users');
+            $table->foreign('user_modifies')->references('id')->on('users');
             $table->timestamps();
         });
     }
