@@ -10,7 +10,7 @@ abstract class RolesEnum
 
     CONST ADMINISTRADOR = 'Administrador';
     CONST SUPER_ADMIN = 'Super Admin';
-    CONST SUPERVISOR = 'Superviso';
+    CONST SUPERVISOR = 'Supervisor';
     CONST VIGILANTE = 'Vigilante';
 
 
