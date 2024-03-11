@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class RolPermiso extends Model
 {
     use HasFactory;
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'rol_permiso';
 }

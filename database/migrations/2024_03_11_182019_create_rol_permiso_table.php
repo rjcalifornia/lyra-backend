@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreign('usuario_crea')->references('id')->on('users');
             $table->foreign('usuario_modifica')->references('id')->on('users');
             $table->foreign('id_rol')->references('id')->on('roles');
-            $table->foreign('id_permiso')->references('id')->on('permisos');
-
+            $table->foreign('id_permiso')->references('id')->on('permiso');
+            $table->timestamps();
         });
     }
 
