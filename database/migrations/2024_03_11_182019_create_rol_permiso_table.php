@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('rol_permiso', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->unsignedInteger('id_rol');
+            $table->unsignedInteger('id_permiso');
             $table->boolean('activo');
-            $table->timestamp('deactivated_at')->nullable();
             $table->unsignedBigInteger('usuario_crea');
             $table->unsignedBigInteger('usuario_modifica')->nullable();
             $table->foreign('usuario_crea')->references('id')->on('users');
             $table->foreign('usuario_modifica')->references('id')->on('users');
-            $table->timestamps();
+            $table->foreign('id_rol')->references('id')->on('roles');
+            $table->foreign('id_permiso')->references('id')->on('permisos');
+
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('rol_permiso');
     }
 };

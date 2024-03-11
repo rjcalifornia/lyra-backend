@@ -16,15 +16,15 @@ abstract class PermisosEnum
     const DESACTIVAR_USUARIO = 'DESACTIVAR_USUARIO';
     const VER_LISTA_USUARIOS_INACTIVOS = 'VER_LISTA_USUARIOS_INACTIVOS';
     const ACTIVAR_USUARIO = 'ACTIVAR_USUARIO';
-    
+
     const VER_LISTA_ROLES = 'VER_LISTA_ROLES';
     const CREAR_ROLE = 'CREAR_ROLE';
     const EDITAR_DATOS_ROLE = 'EDITAR_DATOS_ROLE';
     const DESACTIVAR_ROLE = 'DESACTIVAR_ROLE';
     const AGREGAR_PERMISOS_ROLE = 'AGREGAR_PERMISOS_ROLE';
     const REVOCAR_PERMISOS_ROLE = 'REVOCAR_PERMISOS_ROLE';
-    
-   
+
+
 
     // Permisos de Identificacion y Autorizacion de Dispositivos
     const VER_LISTA_DISPOSITIVOS = 'VER_LISTA_DISPOSITIVOS';
@@ -50,7 +50,8 @@ abstract class PermisosEnum
     const VER_DETALLE_ACTA = 'VER_DETALLE_ACTA';
     const VER_RESULTADOS = 'VER_RESULTADOS';
     const GENERAR_REPORTE = 'GENERAR_REPORTE';
-   
+    const ADJUNTAR_COMPROBANTE = 'ADJUNTAR_COMPROBANTE';
+
 
     // Permisos Vigilantes
     const VER_LISTA_VIGILANTES = 'VER_LISTA_VIGILANTES';
@@ -59,9 +60,9 @@ abstract class PermisosEnum
     const EDITAR_DATOS_VIGILANTE = 'EDITAR_DATOS_VIGILANTE';
     const DESACTIVAR_VIGILANTE = 'DESACTIVAR_VIGILANTE';
     const ACTIVAR_VIGILANTE = 'ACTIVAR_VIGILANTE';
-    
-  
-    
+
+
+
 
     /**
      * Retorna todas las constantes de esta clase, es decir, todos los permisos

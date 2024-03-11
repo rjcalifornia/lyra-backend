@@ -12,7 +12,7 @@ abstract class RolesEnum
     CONST SUPER_ADMIN = 'Super Admin';
     CONST SUPERVISOR = 'Supervisor';
     CONST VIGILANTE = 'Vigilante';
-
+    CONST ADMIN = 'johndoe';
 
     /**
      * Retorna todas las constantes de esta clase, es decir, todos los roles
@@ -23,7 +23,7 @@ abstract class RolesEnum
         return $reflectionClass->getConstants();
     }
 
-    
+
 
     public static function getPermisosDeRol($nombreRol)
     {
@@ -45,11 +45,11 @@ abstract class RolesEnum
             break;
         }
     }
-    
+
     private static function PERMISOS_SUPER_ADMIN()
     {
         // Super Admin tiene todos los permisos
-        
+
         return [
             PermisosEnum::VER_LISTA_USUARIOS,
             PermisosEnum::CREAR_USUARIO,
@@ -70,7 +70,7 @@ abstract class RolesEnum
     private static function PERMISOS_ADMINISTRADOR()
     {
         return [
-            
+
             PermisosEnum::VER_LISTA_REGISTROS_CATALOGO,
             PermisosEnum::CREAR_REGISTRO_CATALOGO,
             PermisosEnum::EDITAR_REGISTRO_CATALOGO,
@@ -101,6 +101,7 @@ abstract class RolesEnum
     {
         return [
             PermisosEnum::REGISTAR_VOTOS,
+            PermisosEnum::ADJUNTAR_COMPROBANTE,
             PermisosEnum::VER_DETALLE_ACTA,
         ];
     }

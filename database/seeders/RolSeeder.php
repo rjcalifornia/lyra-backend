@@ -23,9 +23,9 @@ class RolSeeder extends Seeder
             $now = Carbon::now();
             foreach ($roles as $rol) {
                 $rolesInsert[] = [
-                    'name' => $rol,
-                    'active' => true,
-                    'user_creates' => $superAdminUser->id,
+                    'nombre' => $rol,
+                    'activo' => true,
+                    'usuario_crea' => $superAdminUser->id,
                     'created_at' => $now,
                     'updated_at' => $now,
                 ];
