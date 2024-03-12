@@ -10,9 +10,8 @@ abstract class RolesEnum
 
     CONST ADMINISTRADOR = 'Administrador';
     CONST SUPER_ADMIN = 'Super Admin';
-    CONST SUPERVISOR = 'Supervisor';
+    CONST SUPERVISOR = 'Manager';
     CONST VIGILANTE = 'Vigilante';
-    CONST ADMIN = 'johndoe';
 
     /**
      * Retorna todas las constantes de esta clase, es decir, todos los roles

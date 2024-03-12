@@ -21,7 +21,7 @@ class RolPermisoSeeder extends Seeder
     public function run(): void
     {
         $now = Carbon::now();
-        $superAdminUser = User::where('username', RolesEnum::ADMIN)->firstOrFail();
+        $superAdminUser = User::where('email', 'johndoe@example.com')->firstOrFail();
         $roles = Roles::all();
         $permisosRol = [];
         $now = Carbon::now();

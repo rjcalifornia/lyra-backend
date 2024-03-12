@@ -24,6 +24,7 @@ class RolSeeder extends Seeder
             foreach ($roles as $rol) {
                 $rolesInsert[] = [
                     'nombre' => $rol,
+                    'codigo' => strtoupper(substr($rol, 0, 3)),
                     'activo' => true,
                     'usuario_crea' => $superAdminUser->id,
                     'created_at' => $now,
