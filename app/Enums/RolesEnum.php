@@ -11,7 +11,7 @@ abstract class RolesEnum
     CONST ADMINISTRADOR = 'Administrador';
     CONST SUPER_ADMIN = 'Super Admin';
     CONST SUPERVISOR = 'Manager';
-    CONST VIGILANTE = 'Vigilante';
+    CONST TRANSMISOR = 'Transmisor';
 
     /**
      * Retorna todas las constantes de esta clase, es decir, todos los roles
@@ -36,8 +36,8 @@ abstract class RolesEnum
             case self::SUPERVISOR:
                 return self::PERMISOS_SUPERVISOR();
             break;
-            case self::VIGILANTE:
-                return self::PERMISOS_VIGILANTE();
+            case self::TRANSMISOR:
+                return self::PERMISOS_TRANSMISOR();
             break;
             default:
                 return [];
@@ -96,7 +96,7 @@ abstract class RolesEnum
         ];
     }
 
-    private static function PERMISOS_VIGILANTE()
+    private static function PERMISOS_TRANSMISOR()
     {
         return [
             PermisosEnum::TRANSMITIR_RESULTADOS,
