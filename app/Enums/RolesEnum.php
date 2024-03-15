@@ -99,9 +99,10 @@ abstract class RolesEnum
     private static function PERMISOS_VIGILANTE()
     {
         return [
-            PermisosEnum::REGISTAR_VOTOS,
+            PermisosEnum::TRANSMITIR_RESULTADOS,
             PermisosEnum::ADJUNTAR_COMPROBANTE,
-            PermisosEnum::VER_DETALLE_ACTA,
+            PermisosEnum::VER_DETALLE_TRANSMISION,
+            PermisosEnum::VER_MIS_TRANSMISIONES,
         ];
     }
 

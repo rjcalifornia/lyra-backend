@@ -31,8 +31,6 @@ class AuthenticationController extends Controller
                 'user' => $user
         ]);
 
-
-
     }
 
 }
