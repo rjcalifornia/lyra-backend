@@ -14,4 +14,13 @@ class RolPermiso extends Model
      * @var string
      */
     protected $table = 'rol_permiso';
+
+    protected $fillable = [
+        'id_rol',
+        'id_permiso',
+        'activo',
+        'usuario_crea',
+        'usuario_modifica',
+    ];
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Enums\RolesEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,17 +15,19 @@ use App\Models\User;
 class AuthenticationController extends Controller
 {
     public function login(Request $request){
-        $user = User::where('email', $request['email'])->first();
+        $user = User::with(['rol'])->where('email', $request['email'])->first();
 
         if(!$user){
             return response()->json(['message' => 'Por favor, revise los datos ingresados'], 422);
         }
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password) || $user->rol->nombre != RolesEnum::ADMINISTRADOR) {
             return response()->json(['message' => 'Verifique los datos ingresados e intente nuevamente'], 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
+
+
 
         return response()->json([
                 'access_token' => $token,
