@@ -27,7 +27,7 @@ Route::prefix('/v1/seguridad')->group(function () {
     Route::post('/dashboard/login', [AuthenticationController::class, 'dashboardLogin'])
         ->name('autenticacion-dashboard');
 
-    Route::post('/mobile/pin-validation', [AuthenticationController::class, 'mobileLogin'])
+    Route::post('/mobile/pin-validation', [AuthenticationController::class, 'autenticarDispositivo'])
         ->name('autenticacion-movil');
 
 });
