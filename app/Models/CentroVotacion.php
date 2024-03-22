@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VotingCenters extends Model
+class CentroVotacion extends Model
 {
     use HasFactory;
     /**
