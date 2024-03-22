@@ -34,4 +34,13 @@ class Dispositivos extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+    public function usuarioCrea()
+    {
+        return $this->belongsTo(User::class, 'usuario_crea');
+    }
+    public function usuarioModifica()
+    {
+        return $this->belongsTo(User::class, 'usuario_modifica');
+    }
 }
