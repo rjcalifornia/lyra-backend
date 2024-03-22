@@ -27,7 +27,7 @@ class AuthenticationController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $dispositivo = Dispositivos::where('codigo_autorizacion', $request->codigo_validacion)->where('validado', false)->where('activo', true)->first();
+        $dispositivo = Dispositivos::with(['idCentroVotacion.idDistrito.municipioId.departamentoId', 'idCentroVotacion.usuarioCrea', 'idCentroVotacion.usuarioModifica',])->where('codigo_autorizacion', $request->codigo_validacion)->where('validado', false)->where('activo', true)->first();
 
         if (!$dispositivo) {
             return response()->json(['message' => 'Dispositivo no pudo ser autenticado. Revise los datos ingresados e intente nuevamente'], 422);
@@ -44,6 +44,10 @@ class AuthenticationController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['access_token' => $token, 'user' => $user]);
+        return response()->json([
+            'access_token' => $token,
+            'usuario' => $user,
+            'centro_votacion' => $dispositivo->idCentroVotacion
+        ]);
     }
 }

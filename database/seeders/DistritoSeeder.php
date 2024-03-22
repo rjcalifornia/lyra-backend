@@ -14,7 +14,7 @@ class DistritoSeeder extends Seeder
     public function run(): void
     {
         Distritos::create([
-            'nombre' => 'San Salvador Centro',
+            'nombre' => 'Mejicanos',
             'municipio_id' => 1
         ]);
     }

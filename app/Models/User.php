@@ -46,6 +46,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'activo' => 'boolean',
+        'es_admin' => 'boolean',
     ];
 
 

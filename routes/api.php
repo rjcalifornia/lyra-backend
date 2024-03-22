@@ -31,3 +31,7 @@ Route::prefix('/v1/seguridad')->group(function () {
         ->name('autenticacion-movil');
 
 });
+
+Route::prefix('/v1/mobile/catalogos')->group(function () {
+
+});
