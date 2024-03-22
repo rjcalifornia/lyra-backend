@@ -23,4 +23,27 @@ class CentroVotacion extends Model
         'usuario_crea',
         'usuario_modifica'
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'activo' => 'boolean',
+        'cantidad_mesas_votacion' => 'integer',
+    ];
+
+    public function idDistrito()
+    {
+        return $this->belongsTo(Distritos::class, 'id_distrito');
+    }
+    public function usuarioCrea()
+    {
+        return $this->belongsTo(User::class, 'usuario_crea');
+    }
+    public function usuarioModifica()
+    {
+        return $this->belongsTo(User::class, 'usuario_modifica');
+    }
 }

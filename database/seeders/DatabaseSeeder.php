@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RolSeeder::class);
         $this->call(PermisoSeeder::class);
         $this->call(RolPermisoSeeder::class);
+        $this->call(DepartamentoSeeder::class);
+        $this->call(MunicipioSeeder::class);
+        $this->call(DistritoSeeder::class);
+        $this->call(CentroVotacionSeeder::class);
+        $this->call(DispositivoSeeder::class);
     }
 }

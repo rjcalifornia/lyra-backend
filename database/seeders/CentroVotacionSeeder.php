@@ -15,7 +15,7 @@ class CentroVotacionSeeder extends Seeder
     {
         CentroVotacion::create([
         'nombre' => 'Centro Escolar San Ramon',
-        'id_distrito' => 21,
+        'id_distrito' => 1,
         'cantidad_mesas_votacion'  => 8,
         'activo' => true,
         'usuario_crea' => 1,

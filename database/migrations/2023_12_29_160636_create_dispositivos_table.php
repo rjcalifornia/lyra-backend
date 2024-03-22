@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_modifica')->nullable();
             $table->foreign('usuario_crea')->references('id')->on('users');
             $table->foreign('usuario_modifica')->references('id')->on('users');
+            $table->foreign('id_centro_votacion')->references('id')->on('centro_votacion');
             $table->timestamps();
         });
     }
