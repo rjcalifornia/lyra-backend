@@ -39,6 +39,9 @@ class AuthenticationController extends Controller
             return response()->json(['message' => 'Revise los datos ingresados'], 401);
         }
 
+        $dispositivo->validado = true;
+        //$dispositivo->save();
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(['access_token' => $token, 'user' => $user]);
