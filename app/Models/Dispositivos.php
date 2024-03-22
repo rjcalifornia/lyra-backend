@@ -25,6 +25,16 @@ class Dispositivos extends Model
         'usuario_modifica'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'activo' => 'boolean',
+        'validado' => 'boolean',
+    ];
+
     public function idUsuario()
     {
         return $this->belongsTo(User::class, 'id_usuario');
@@ -32,6 +42,15 @@ class Dispositivos extends Model
 
     public function idCentroVotacion()
     {
-        return $this->belongsTo(User::class, 'id_usuario');
+        return $this->belongsTo(CentroVotacion::class, 'id_centro_votacion');
+    }
+
+    public function usuarioCrea()
+    {
+        return $this->belongsTo(User::class, 'usuario_crea');
+    }
+    public function usuarioModifica()
+    {
+        return $this->belongsTo(User::class, 'usuario_modifica');
     }
 }
