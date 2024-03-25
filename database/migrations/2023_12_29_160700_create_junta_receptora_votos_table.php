@@ -15,10 +15,11 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('correlativo');
             $table->unsignedInteger('id_centro_votacion');
-            $table->unsignedBigInteger('user_creates');
-            $table->unsignedBigInteger('user_modifies')->nullable();
-            $table->foreign('user_creates')->references('id')->on('users');
-            $table->foreign('user_modifies')->references('id')->on('users');
+            $table->unsignedBigInteger('usuario_crea');
+            $table->unsignedBigInteger('usuario_modifica')->nullable();
+            $table->boolean('activo')->nullable();
+            $table->foreign('usuario_crea')->references('id')->on('users');
+            $table->foreign('usuario_modifica')->references('id')->on('users');
             $table->foreign('id_centro_votacion')->references('id')->on('centro_votacion');
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('voting_count_board_catalog');
+        Schema::dropIfExists('junta_receptora_votos');
     }
 };
