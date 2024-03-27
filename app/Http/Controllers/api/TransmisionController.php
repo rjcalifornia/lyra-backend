@@ -9,6 +9,7 @@ class TransmisionController extends Controller
 {
     public function obtenerTransmisiones(Request $request){
 
+        $actas =
     }
 
     public function almacenarTransmision(){

@@ -3,7 +3,7 @@
 use App\Http\Controllers\api\AuthenticationController;
 use App\Http\Controllers\api\CatalogosController;
 use App\Http\Controllers\LoginController;
-use App\Http\Middleware\ValidacionTransmisor;
+use App\Http\Middleware\ValidacionDispositivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +35,6 @@ Route::prefix('/v1/seguridad')->group(function () {
 });
 
 Route::prefix('/v1/mobile/catalogos')->group(function () {
-    Route::get('/juntas/receptoras', [CatalogosController::class, 'obtenerJuntasReceptoras'])->middleware([ValidacionTransmisor::class, 'auth:sanctum','can:verJuntasReceptoras, App\Models\JuntasReceptoras']);
+    Route::get('/juntas/receptoras', [CatalogosController::class, 'obtenerJuntasReceptoras'])
+        ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verJuntasReceptoras, App\Models\JuntasReceptoras']);
 });

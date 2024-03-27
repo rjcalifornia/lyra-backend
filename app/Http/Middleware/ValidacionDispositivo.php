@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Dispositivos;
 
-class ValidacionTransmisor
+class ValidacionDispositivo
 {
     /**
      * Handle an incoming request.
