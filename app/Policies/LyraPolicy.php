@@ -8,7 +8,7 @@ use App\Utils\PolicyUtil;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
-class TransmisorPolicy
+class LyraPolicy
 {
     use HandlesAuthorization;
 

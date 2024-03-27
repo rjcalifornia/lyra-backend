@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\ActaElectoral;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 use App\Models\JuntasReceptoras;
-use App\Policies\TransmisorPolicy;
+use App\Policies\LyraPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        JuntasReceptoras::class => TransmisorPolicy::class,
+        JuntasReceptoras::class => LyraPolicy::class,
+        ActaElectoral::class => LyraPolicy::class,
     ];
 
     /**
