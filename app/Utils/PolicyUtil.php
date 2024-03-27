@@ -20,16 +20,16 @@ abstract class PolicyUtil
             // Log::info($user->rol->permisos);
         }
 
-        foreach ($user->permisosEspeciales as $permisoEspecial) {
+        /* foreach ($user->permisosEspeciales as $permisoEspecial) {
             if ($permisoEspecial->nombre == $nombrePermiso) {
                 // return true;
                 $allow = true;
             }
-        }
+        } */
         if ($allow) {
-            Log::debug("Usuario $user->name con resultado aprobado para permiso $nombrePermiso");
+            Log::debug("Usuario $user->nombre_completo con resultado aprobado para permiso $nombrePermiso");
         } else {
-            Log::debug("Usuario $user->name con resultado denegado para permiso $nombrePermiso");
+            Log::debug("Usuario $user->nombre_completo con resultado denegado para permiso $nombrePermiso");
         }
         // Log::info($user->permisosEspeciales);
         // return false;

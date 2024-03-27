@@ -52,6 +52,7 @@ abstract class PermisosEnum
     const GENERAR_REPORTE = 'GENERAR_REPORTE';
     const ADJUNTAR_COMPROBANTE = 'ADJUNTAR_COMPROBANTE';
     const VER_MIS_TRANSMISIONES = 'VER_MIS_TRANSMISIONES';
+    const VER_JUNTAS_RECEPTORAS = 'VER_JUNTAS_RECEPTORAS';
 
 
     // Permisos Vigilantes

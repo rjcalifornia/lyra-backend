@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('electoral_acts', function (Blueprint $table) {
+        Schema::create('partidos_politicos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_creates');
             $table->unsignedBigInteger('user_modifies')->nullable();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('electoral_acts');
+        Schema::dropIfExists('partidos_politicos');
     }
 };

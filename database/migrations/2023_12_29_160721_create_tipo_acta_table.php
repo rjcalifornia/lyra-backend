@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('junta_receptora_votos', function (Blueprint $table) {
+        Schema::create('tipo_acta', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('correlativo');
-            $table->unsignedInteger('id_centro_votacion');
+            $table->string('nombre');
+            $table->boolean('activo')->nullable();
             $table->unsignedBigInteger('usuario_crea');
             $table->unsignedBigInteger('usuario_modifica')->nullable();
-            $table->boolean('activo')->nullable();
             $table->foreign('usuario_crea')->references('id')->on('users');
             $table->foreign('usuario_modifica')->references('id')->on('users');
-            $table->foreign('id_centro_votacion')->references('id')->on('centro_votacion');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('junta_receptora_votos');
+        Schema::dropIfExists('tipo_acta');
     }
 };

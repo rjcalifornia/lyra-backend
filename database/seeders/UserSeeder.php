@@ -64,5 +64,17 @@ class UserSeeder extends Seeder
                     'activo' => true,
 
                     ]);
+                User::create([
+                    'nombre_completo' => 'Marlon Brandon',
+                    'username' => 'mbrandon',
+                    'rol_id' => 4,
+                    'telefono' => '2000-0005',
+                    'email' => 'mbrandon@example.com',
+                    'email_verified_at' => null,
+                    'password' => bcrypt('1234567'),
+                    'es_admin' => false,
+                    'activo' => true,
+
+                    ]);
     }
 }

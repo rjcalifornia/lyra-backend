@@ -103,6 +103,7 @@ abstract class RolesEnum
             PermisosEnum::ADJUNTAR_COMPROBANTE,
             PermisosEnum::VER_DETALLE_TRANSMISION,
             PermisosEnum::VER_MIS_TRANSMISIONES,
+            PermisosEnum::VER_JUNTAS_RECEPTORAS,
         ];
     }
 
