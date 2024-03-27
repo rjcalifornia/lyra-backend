@@ -22,5 +22,14 @@ class DispositivoSeeder extends Seeder
         'usuario_crea' => 1,
         'usuario_modifica' => 1
         ]);
+        Dispositivos::create([
+        'id_usuario' => 5,
+        'id_centro_votacion' => 2,
+        'codigo_autorizacion' => '882078',
+        'validado' => false,
+        'activo' => true,
+        'usuario_crea' => 1,
+        'usuario_modifica' => 1
+        ]);
     }
 }

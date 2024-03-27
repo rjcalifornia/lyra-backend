@@ -21,5 +21,13 @@ class CentroVotacionSeeder extends Seeder
         'usuario_crea' => 1,
         'usuario_modifica' => 1
         ]);
+        CentroVotacion::create([
+        'nombre' => 'Centro Escolar Constitucion',
+        'id_distrito' => 1,
+        'cantidad_mesas_votacion'  => 12,
+        'activo' => true,
+        'usuario_crea' => 1,
+        'usuario_modifica' => 1
+        ]);
     }
 }
