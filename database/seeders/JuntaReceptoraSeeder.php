@@ -18,6 +18,7 @@ class JuntaReceptoraSeeder extends Seeder
             'id_centro_votacion' => 1,
             'activo' => true,
             'usuario_crea' => 1,
+            'usuario_modifica' => 1,
         ]);
     }
 }

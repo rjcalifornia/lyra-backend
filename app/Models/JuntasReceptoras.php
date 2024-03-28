@@ -35,4 +35,13 @@ class JuntasReceptoras extends Model
     {
         return $this->belongsTo(CentroVotacion::class, 'id_centro_votacion');
     }
+
+    public function usuarioCrea()
+    {
+        return $this->belongsTo(User::class, 'usuario_crea');
+    }
+    public function usuarioModifica()
+    {
+        return $this->belongsTo(User::class, 'usuario_modifica');
+    }
 }

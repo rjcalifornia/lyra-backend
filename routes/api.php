@@ -43,4 +43,7 @@ Route::prefix('/v1/mobile/catalogos')->group(function () {
 Route::prefix('/v1/tranmision')->group(function () {
     Route::get('/', [TransmisionController::class, 'obtenerTransmisiones'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:listarTransmision, App\Models\ActaElectoral']);
+
+    Route::post('/', [TransmisionController::class, 'almacenarTransmision'])
+        ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:crearTransmision, App\Models\ActaElectoral']);
 });
