@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CentroVotacionSeeder::class);
         $this->call(DispositivoSeeder::class);
         $this->call(JuntaReceptoraSeeder::class);
+        $this->call(PartidoSeeder::class);
     }
 }
