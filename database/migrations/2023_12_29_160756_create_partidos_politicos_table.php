@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('partidos_politicos', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_creates');
-            $table->unsignedBigInteger('user_modifies')->nullable();
-            $table->foreign('user_creates')->references('id')->on('users');
-            $table->foreign('user_modifies')->references('id')->on('users');
+            $table->increments('id');
+            $table->string('nombre');
+            $table->string('siglas');
+            $table->unsignedBigInteger('usuario_crea');
+            $table->unsignedBigInteger('usuario_modifica')->nullable();
+            $table->foreign('usuario_crea')->references('id')->on('users');
+            $table->foreign('usuario_modifica')->references('id')->on('users');
             $table->timestamps();
         });
     }

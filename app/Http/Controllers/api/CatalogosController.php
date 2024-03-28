@@ -12,7 +12,7 @@ class CatalogosController extends Controller
 {
     public function obtenerJuntasReceptoras(Request $request){
 
-        $juntasReceptoras = JuntasReceptoras::where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
+        $juntasReceptoras = JuntasReceptoras::with(['idCentroVotacion', 'usuarioCrea', 'usuarioModifica'])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
 
         return response()->json(['juntas_receptoras' => $juntasReceptoras], 200);
     }
