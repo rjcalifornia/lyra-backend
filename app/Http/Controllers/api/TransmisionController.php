@@ -75,7 +75,7 @@ class TransmisionController extends Controller
             $acta->usuario_crea = $user->id;
             $acta->save();
 
-            return response()->json($acta, 200);
+            return response()->json($acta, 201);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 500);
         }
