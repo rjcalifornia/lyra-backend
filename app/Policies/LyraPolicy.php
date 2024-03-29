@@ -37,4 +37,8 @@ class LyraPolicy
         return PolicyUtil::hasPermiso($user, PermisosEnum::VER_JUNTAS_RECEPTORAS);
     }
 
+    public function verPartidosPoliticos(User $user){
+        return PolicyUtil::hasPermiso($user, PermisosEnum::VER_CATALOGO_PARTIDOS_POLITICOS);
+    }
+
 }

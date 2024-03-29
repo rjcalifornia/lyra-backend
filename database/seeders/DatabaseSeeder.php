@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,9 +20,15 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartamentoSeeder::class);
         $this->call(MunicipioSeeder::class);
         $this->call(DistritoSeeder::class);
-        $this->call(CentroVotacionSeeder::class);
-        $this->call(DispositivoSeeder::class);
-        $this->call(JuntaReceptoraSeeder::class);
-        $this->call(PartidoSeeder::class);
+        $this->call(TipoActaSeeder::class);
+        if (App::Environment() === 'local')
+        {
+            $this->call(CentroVotacionSeeder::class);
+            $this->call(JuntaReceptoraSeeder::class);
+            $this->call(DispositivoSeeder::class);
+            $this->call(PartidoSeeder::class);
+            $this->call(PartidoTipoEleccionSeeder::class);
+        }
+
     }
 }

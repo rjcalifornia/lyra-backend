@@ -13,8 +13,26 @@ class TipoActaSeeder extends Seeder
      */
     public function run(): void
     {
-        TipoActa::create([
-
-        ]);
+        $tipoActas = [
+            [
+                "nombre" => "Presidente",
+                "codigo" => "PRE",
+                "activo" => true,
+                "usuario_crea" => 1,
+            ],
+            [
+                "nombre" => "Diputados",
+                "codigo" => "DIP",
+                "activo" => true,
+                "usuario_crea" => 1,
+            ],
+            [
+                "nombre" => "Alcaldes",
+                "codigo" => "ALC",
+                "activo" => true,
+                "usuario_crea" => 1,
+            ],
+        ];
+        TipoActa::insert($tipoActas);
     }
 }
