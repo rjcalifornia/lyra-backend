@@ -104,6 +104,7 @@ abstract class RolesEnum
             PermisosEnum::VER_DETALLE_TRANSMISION,
             PermisosEnum::VER_MIS_TRANSMISIONES,
             PermisosEnum::VER_JUNTAS_RECEPTORAS,
+            PermisosEnum::VER_CATALOGO_PARTIDOS_POLITICOS,
         ];
     }
 

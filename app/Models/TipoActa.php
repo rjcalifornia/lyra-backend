@@ -29,4 +29,14 @@ class TipoActa extends Model
     protected $casts = [
         'activo' => 'boolean',
     ];
+
+
+    public function usuarioCrea()
+    {
+        return $this->belongsTo(User::class, 'usuario_crea');
+    }
+    public function usuarioModifica()
+    {
+        return $this->belongsTo(User::class, 'usuario_modifica');
+    }
 }
