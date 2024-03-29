@@ -16,6 +16,7 @@ class TipoActa extends Model
     protected $table = 'tipo_acta';
     protected $fillable = [
         'nombre',
+        'codigo',
         'activo',
         'usuario_crea',
         'usuario_modifica'
