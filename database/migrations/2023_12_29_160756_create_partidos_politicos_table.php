@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('siglas');
+            $table->boolean('activo')->nullable();
             $table->unsignedBigInteger('usuario_crea');
             $table->unsignedBigInteger('usuario_modifica')->nullable();
             $table->foreign('usuario_crea')->references('id')->on('users');

@@ -17,16 +17,19 @@ class PartidoSeeder extends Seeder
             [
                 'nombre' => 'Partido Uno',
                 'siglas' => 'PUN',
+                "activo" => true,
                 'usuario_crea' => 1,
             ],
             [
                 'nombre' => 'Partido Dos',
                 'siglas' => 'PAD',
+                "activo" => true,
                 'usuario_crea' => 1,
             ],
             [
                 'nombre' => 'Partido Tres',
                 'siglas' => 'PTR',
+                "activo" => true,
                 'usuario_crea' => 1,
             ]
         ];

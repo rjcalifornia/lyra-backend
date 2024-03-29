@@ -38,12 +38,15 @@ Route::prefix('/v1/seguridad')->group(function () {
 Route::prefix('/v1/mobile/catalogos')->group(function () {
     Route::get('/juntas/receptoras', [CatalogosController::class, 'obtenerJuntasReceptoras'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verJuntasReceptoras, App\Models\JuntasReceptoras']);
+
+    Route::get('/partidos-politicos/{idTipoEleccion}', [CatalogosController::class, 'obtenerPartidosPoliticos'])
+        ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verPartidosPoliticos, App\Models\PartidosPoliticos']);
 });
 
 Route::prefix('/v1/tranmision')->group(function () {
     Route::get('/', [TransmisionController::class, 'obtenerTransmisiones'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:listarTransmision, App\Models\ActaElectoral']);
 
-    Route::post('/', [TransmisionController::class, 'almacenarTransmision'])
+    Route::post('/alcaldes', [TransmisionController::class, 'almacenarTransmisionAlcaldes'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:crearTransmision, App\Models\ActaElectoral']);
 });

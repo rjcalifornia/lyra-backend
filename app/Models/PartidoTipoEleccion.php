@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PartidosPoliticos extends Model
+class PartidoTipoEleccion extends Model
 {
     use HasFactory;
     /**
@@ -13,16 +13,16 @@ class PartidosPoliticos extends Model
      *
      * @var string
      */
-    protected $table = 'partidos_politicos';
+    protected $table = 'partido_tipo_eleccion';
     protected $fillable = [
-        'nombre',
-        'siglas',
+        'id_partido',
+        'id_tipo_acta',
         'activo',
         'usuario_crea',
         'usuario_modifica'
     ];
 
-    /**
+     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
@@ -31,6 +31,14 @@ class PartidosPoliticos extends Model
         'activo' => 'boolean',
     ];
 
+    public function idPartido()
+    {
+        return $this->belongsTo(PartidosPoliticos::class, 'id_partido');
+    }
+    public function idTipoActa()
+    {
+        return $this->belongsTo(TipoActa::class, 'id_tipo_acta');
+    }
 
     public function usuarioCrea()
     {
