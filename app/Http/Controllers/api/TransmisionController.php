@@ -14,25 +14,25 @@ class TransmisionController extends Controller
 {
     public function obtenerTransmisiones(Request $request){
 
-        $actas = ActaElectoral::where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
+        $actas = ActaElectoral::with(['idJuntaReceptora', 'idCentroVotacion', 'idTipoActa', 'usuarioCrea'])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
 
         return response()->json(['transmisiones'=> $actas], 200);
     }
 
-    public function almacenarTransmision(Request $request){
+    public function almacenarTransmisionAlcaldes(Request $request){
         $validator = Validator::make($request->all(), [
             'id_junta_receptora' => 'integer|required',
             'id_centro_votacion' =>  'integer|required',
-            // 'sobrantes' =>  'integer|required',
-            // 'inutilizados' =>  'integer|required',
-            // 'impugnados' =>  'integer|required',
-            // 'nulos' =>  'integer|required',
-            // 'abstenciones' =>  'integer|required',
-            // 'escrutados' =>  'integer|required',
-            // 'faltantes' =>  'integer|required',
-            // 'entregados' =>  'integer|required',
-            // 'id_tipo_acta' =>  'integer|required',
-            // 'partidos' => 'array'
+            'sobrantes' =>  'integer|required',
+            'inutilizados' =>  'integer|required',
+            'impugnados' =>  'integer|required',
+            'nulos' =>  'integer|required',
+            'abstenciones' =>  'integer|required',
+            'escrutados' =>  'integer|required',
+            'faltantes' =>  'integer|required',
+            'entregados' =>  'integer|required',
+            'id_tipo_acta' =>  'integer|required',
+            'partidos' => 'array'
         ]);
 
         if ($validator->fails()) {
@@ -54,6 +54,8 @@ class TransmisionController extends Controller
             $acta = new ActaElectoral;
             $acta->id_junta_receptora = $request->id_junta_receptora;
             $acta->id_centro_votacion = $request->id_centro_votacion;
+            $acta->id_tipo_acta = $request->id_tipo_acta;
+            $acta->usuario_crea = $user->id;
             $acta->save();
 
             return response()->json($acta, 200);
