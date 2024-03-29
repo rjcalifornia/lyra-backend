@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tipo_acta', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
+            $table->string('codigo');
             $table->boolean('activo')->nullable();
             $table->unsignedBigInteger('usuario_crea');
             $table->unsignedBigInteger('usuario_modifica')->nullable();

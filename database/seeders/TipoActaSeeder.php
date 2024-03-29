@@ -16,16 +16,19 @@ class TipoActaSeeder extends Seeder
         $tipoActas = [
             [
                 "nombre" => "Presidente",
+                "codigo" => "PRE",
                 "activo" => true,
                 "usuario_crea" => 1,
             ],
             [
                 "nombre" => "Diputados",
+                "codigo" => "DIP",
                 "activo" => true,
                 "usuario_crea" => 1,
             ],
             [
                 "nombre" => "Alcaldes",
+                "codigo" => "ALC",
                 "activo" => true,
                 "usuario_crea" => 1,
             ],

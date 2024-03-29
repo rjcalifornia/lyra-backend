@@ -31,7 +31,6 @@ class TransmisionController extends Controller
             'escrutados' =>  'integer|required',
             'faltantes' =>  'integer|required',
             'entregados' =>  'integer|required',
-            'id_tipo_acta' =>  'integer|required',
             'partidos' => 'array'
         ]);
 
@@ -55,6 +54,14 @@ class TransmisionController extends Controller
             $acta->id_junta_receptora = $request->id_junta_receptora;
             $acta->id_centro_votacion = $request->id_centro_votacion;
             $acta->id_tipo_acta = $request->id_tipo_acta;
+            $acta->sobrantes = $request->sobrantes;
+            $acta->inutilizados = $request->inutilizados;
+            $acta->impugnados = $request->impugnados;
+            $acta->nulos = $request->nulos;
+            $acta->abstenciones = $request->abstenciones;
+            $acta->escrutados = $request->escrutados;
+            $acta->faltantes = $request->faltantes;
+            $acta->entregados = $request->entregados;
             $acta->usuario_crea = $user->id;
             $acta->save();
 
