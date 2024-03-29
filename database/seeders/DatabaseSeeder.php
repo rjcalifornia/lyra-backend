@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(JuntaReceptoraSeeder::class);
         $this->call(PartidoSeeder::class);
         $this->call(TipoActaSeeder::class);
+        $this->call(PartidoTipoEleccionSeeder::class);
     }
 }
