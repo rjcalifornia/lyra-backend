@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActaElectoral;
 use App\Models\Dispositivos;
 use App\Models\JuntasReceptoras;
+use App\Models\TipoActa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -49,11 +50,20 @@ class TransmisionController extends Controller
             return response()->json(['message' => 'Hubo un problema al procesar la petición del dispositivo'], 422);
         }
 
+        $tipoActa = TipoActa::where('codigo', 'ALC')->first();
+
+        $buscarTransmision = ActaElectoral::where('id_junta_receptora', $request->id_junta_receptora)->first();
+
+        if($buscarTransmision){
+            return response()->json(['message' => 'Datos ya han sido transmitidos anteriormente. Contacte al administrador'], 422);
+        }
+
+
         try {
             $acta = new ActaElectoral;
             $acta->id_junta_receptora = $request->id_junta_receptora;
             $acta->id_centro_votacion = $request->id_centro_votacion;
-            $acta->id_tipo_acta = $request->id_tipo_acta;
+            $acta->id_tipo_acta = $tipoActa->id;
             $acta->sobrantes = $request->sobrantes;
             $acta->inutilizados = $request->inutilizados;
             $acta->impugnados = $request->impugnados;
