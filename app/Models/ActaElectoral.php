@@ -69,4 +69,7 @@ class ActaElectoral extends Model
     {
         return $this->belongsTo(User::class, 'usuario_modifica');
     }
+    public function resultados(){
+        return $this->hasMany(Votos::class, 'id_acta_electoral');
+    }
 }

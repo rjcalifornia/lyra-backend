@@ -32,4 +32,12 @@ class Votos extends Model
     {
         return $this->belongsTo(ActaElectoral::class, 'id_acta_electoral');
     }
+    public function usuarioCrea()
+    {
+        return $this->belongsTo(User::class, 'usuario_crea');
+    }
+    public function usuarioModifica()
+    {
+        return $this->belongsTo(User::class, 'usuario_modifica');
+    }
 }

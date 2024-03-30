@@ -22,7 +22,12 @@ class TransmisionController extends Controller
     }
     public function obtenerTransmisiones(Request $request){
 
-        $actas = ActaElectoral::with(['idJuntaReceptora', 'idCentroVotacion', 'idTipoActa', 'usuarioCrea'])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
+        $actas = ActaElectoral::with([
+                                        'idJuntaReceptora', 'idCentroVotacion',
+                                        'idTipoActa', 'usuarioCrea',
+                                        'resultados.idPartido',
+                                        'resultados.usuarioCrea',
+                                    ])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
 
         return response()->json(['transmisiones'=> $actas], 200);
     }
