@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vote_count', function (Blueprint $table) {
+        Schema::create('votos', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('party_id');
-            $table->unsignedInteger('electoral_act_id');
-            $table->integer('votes');
+            $table->unsignedInteger('id_partido');
+            $table->unsignedInteger('id_acta_electoral');
+            $table->integer('votos');
             $table->unsignedBigInteger('user_creates');
             $table->unsignedBigInteger('user_modifies')->nullable();
             $table->foreign('user_creates')->references('id')->on('users');
             $table->foreign('user_modifies')->references('id')->on('users');
+            $table->foreign('id_partido')->references('id')->on('partidos_politicos');
+            $table->foreign('id_acta_electoral')->references('id')->on('acta_electoral');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vote_count');
+        Schema::dropIfExists('votos');
     }
 };
