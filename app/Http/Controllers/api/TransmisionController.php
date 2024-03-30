@@ -7,15 +7,27 @@ use App\Models\ActaElectoral;
 use App\Models\Dispositivos;
 use App\Models\JuntasReceptoras;
 use App\Models\TipoActa;
+use App\Models\Votos;
+use App\Services\ActaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class TransmisionController extends Controller
 {
+    protected $actaService;
+
+    public function __construct(ActaService $actaService){
+        $this->actaService = $actaService;
+    }
     public function obtenerTransmisiones(Request $request){
 
-        $actas = ActaElectoral::with(['idJuntaReceptora', 'idCentroVotacion', 'idTipoActa', 'usuarioCrea'])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
+        $actas = ActaElectoral::with([
+                                        'idJuntaReceptora', 'idCentroVotacion',
+                                        'idTipoActa', 'usuarioCrea',
+                                        'resultados.idPartido',
+                                        'resultados.usuarioCrea',
+                                    ])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
 
         return response()->json(['transmisiones'=> $actas], 200);
     }
@@ -32,7 +44,7 @@ class TransmisionController extends Controller
             'escrutados' =>  'integer|required',
             'faltantes' =>  'integer|required',
             'entregados' =>  'integer|required',
-            'partidos' => 'array'
+            'resultados' => 'array|required'
         ]);
 
         if ($validator->fails()) {
@@ -61,21 +73,20 @@ class TransmisionController extends Controller
 
         try {
             $acta = new ActaElectoral;
-            $acta->id_junta_receptora = $request->id_junta_receptora;
-            $acta->id_centro_votacion = $request->id_centro_votacion;
-            $acta->id_tipo_acta = $tipoActa->id;
-            $acta->sobrantes = $request->sobrantes;
-            $acta->inutilizados = $request->inutilizados;
-            $acta->impugnados = $request->impugnados;
-            $acta->nulos = $request->nulos;
-            $acta->abstenciones = $request->abstenciones;
-            $acta->escrutados = $request->escrutados;
-            $acta->faltantes = $request->faltantes;
-            $acta->entregados = $request->entregados;
-            $acta->usuario_crea = $user->id;
-            $acta->save();
+
+            $acta = $this->actaService->almacenarActa($acta, $request, $tipoActa, $user);
+
+            foreach ($request->resultados as $resultado){
+                $votos = new Votos;
+                $votos->id_partido = $resultado['id_partido'];
+                $votos->id_acta_electoral = $acta->id;
+                $votos->votos = $resultado['votos'];
+                $votos->usuario_crea = $user->id;
+                $votos->save();
+            }
 
             return response()->json($acta, 201);
+
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 500);
         }
