@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_partido');
             $table->unsignedInteger('id_tipo_acta');
+            $table->unsignedInteger('municipio_id');
             $table->boolean('activo');
             $table->unsignedBigInteger('usuario_crea');
             $table->unsignedBigInteger('usuario_modifica')->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->foreign('usuario_modifica')->references('id')->on('users');
             $table->foreign('id_partido')->references('id')->on('partidos_politicos');
             $table->foreign('id_tipo_acta')->references('id')->on('tipo_acta');
+            $table->foreign('municipio_id')->references('id')->on('municipios');
             $table->timestamps();
         });
     }

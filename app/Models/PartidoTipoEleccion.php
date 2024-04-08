@@ -17,6 +17,7 @@ class PartidoTipoEleccion extends Model
     protected $fillable = [
         'id_partido',
         'id_tipo_acta',
+        'municipio_id',
         'activo',
         'usuario_crea',
         'usuario_modifica'
