@@ -43,7 +43,7 @@ Route::prefix('/v1/mobile/catalogos')->group(function () {
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verPartidosPoliticos, App\Models\PartidosPoliticos']);
 });
 
-Route::prefix('/v1/tranmision')->group(function () {
+Route::prefix('/v1/mobile/tranmisiones')->group(function () {
     Route::get('/', [TransmisionController::class, 'obtenerTransmisiones'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:listarTransmision, App\Models\ActaElectoral']);
 
