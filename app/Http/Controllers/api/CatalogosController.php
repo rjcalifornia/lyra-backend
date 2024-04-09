@@ -38,6 +38,6 @@ class CatalogosController extends Controller
 
         $partidos = $this->catalogoService->filtrarCandidatos($request, $tipoEleccion);
 
-        return response()->json(['partidos' => $partidos], 200);
+        return response()->json(['candidatos' => $partidos], 200);
     }
 }

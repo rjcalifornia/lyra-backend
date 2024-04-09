@@ -36,7 +36,7 @@ Route::prefix('/v1/seguridad')->group(function () {
 });
 
 Route::prefix('/v1/mobile/catalogos')->group(function () {
-    Route::get('/juntas/receptoras', [CatalogosController::class, 'obtenerJuntasReceptoras'])
+    Route::get('/juntas-receptoras', [CatalogosController::class, 'obtenerJuntasReceptoras'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verJuntasReceptoras, App\Models\JuntasReceptoras']);
 
     Route::get('/partidos-politicos/{idTipoEleccion}', [CatalogosController::class, 'obtenerCandidatos'])
