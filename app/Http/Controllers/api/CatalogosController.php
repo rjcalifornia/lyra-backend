@@ -9,10 +9,17 @@ use App\Models\JuntasReceptoras;
 use App\Models\PartidosPoliticos;
 use App\Models\PartidoTipoEleccion;
 use App\Models\TipoActa;
+use App\Services\CatalogoService;
 use Illuminate\Http\Request;
 
 class CatalogosController extends Controller
 {
+    protected $catalogoService;
+
+    public function __construct(CatalogoService $catalogoService){
+        $this->catalogoService = $catalogoService;
+    }
+
     public function obtenerJuntasReceptoras(Request $request){
 
         $juntasReceptoras = JuntasReceptoras::with(['idCentroVotacion', 'usuarioCrea', 'usuarioModifica'])
@@ -29,19 +36,8 @@ class CatalogosController extends Controller
             return response()->json(['message' => 'Hubo un error al procesar los datos'], 422);
         }
 
-        $partidos = PartidoTipoEleccion::with(['idPartido.usuarioCrea','idTipoActa.usuarioCrea','usuarioCrea', 'usuarioModifica'])
-                                        ->where('id_tipo_acta', $tipoEleccion->id)
-                                        ->where('municipio_id', $request->dispositivo->idCentroVotacion->idDistrito->municipio_id)
-                                        ->get();
+        $partidos = $this->catalogoService->filtrarCandidatos($request, $tipoEleccion);
 
-        if($tipoEleccion->codigo == TipoActaEnum::CONGRESO){
-            $partidos = PartidoTipoEleccion::with(['idPartido.usuarioCrea','idTipoActa.usuarioCrea','usuarioCrea', 'usuarioModifica'])
-                                        ->where('id_tipo_acta', $tipoEleccion->id)
-                                        
-                                        ->get();
-
-        }
-        
         return response()->json(['partidos' => $partidos], 200);
     }
 }
