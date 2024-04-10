@@ -47,6 +47,9 @@ Route::prefix('/v1/mobile/tranmisiones')->group(function () {
     Route::get('/', [TransmisionController::class, 'obtenerTransmisiones'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:listarTransmision, App\Models\ActaElectoral']);
 
+    Route::get('/{idActa}', [TransmisionController::class, 'verDetalleTransmision'])
+        ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:verTransmision, App\Models\ActaElectoral']);
+
     Route::post('/alcaldes', [TransmisionController::class, 'almacenarTransmisionAlcaldes'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:crearTransmision, App\Models\ActaElectoral']);
 });
