@@ -16,20 +16,23 @@ class CatalogosController extends Controller
 {
     protected $catalogoService;
 
-    public function __construct(CatalogoService $catalogoService){
+    public function __construct(CatalogoService $catalogoService)
+    {
         $this->catalogoService = $catalogoService;
     }
 
-    public function obtenerJuntasReceptoras(Request $request){
+    public function obtenerJuntasReceptoras(Request $request)
+    {
 
         $juntasReceptoras = JuntasReceptoras::with(['idCentroVotacion', 'usuarioCrea', 'usuarioModifica'])
-                        ->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)
-                        ->get();
+            ->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)
+            ->get();
 
         return response()->json(['juntas_receptoras' => $juntasReceptoras], 200);
     }
 
-    public function obtenerCandidatos(Request $request, $idTipoEleccion){
+    public function obtenerCandidatos(Request $request, $idTipoEleccion)
+    {
 
         $tipoEleccion = TipoActa::where('id', $idTipoEleccion)->first();
         if (!$tipoEleccion) {
