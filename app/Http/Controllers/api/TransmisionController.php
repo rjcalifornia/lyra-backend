@@ -73,17 +73,8 @@ class TransmisionController extends Controller
 
         try {
             $acta = new ActaElectoral;
-
             $acta = $this->actaService->almacenarActa($acta, $request, $tipoActa, $user);
-
-            foreach ($request->resultados as $resultado){
-                $votos = new Votos;
-                $votos->id_partido = $resultado['id_partido'];
-                $votos->id_acta_electoral = $acta->id;
-                $votos->votos = $resultado['votos'];
-                $votos->usuario_crea = $user->id;
-                $votos->save();
-            }
+            $this->actaService->almacenarVotos($acta, $request, $user);
 
             return response()->json($acta, 201);
 

@@ -19,7 +19,7 @@ class ValidacionDispositivo
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-        $dispositivo = Dispositivos::where('id_usuario', $user->id)->first();
+        $dispositivo = Dispositivos::with(['idCentroVotacion.idDistrito.municipioId'])->where('id_usuario', $user->id)->first();
 
         if(!$dispositivo){
             return response()->json(['message' => 'Hubo un error al procesar la peticion'], 401);
