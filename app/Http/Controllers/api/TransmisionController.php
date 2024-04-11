@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Enums\TipoActaEnum;
 use App\Http\Controllers\Controller;
 use App\Models\ActaElectoral;
 use App\Models\Dispositivos;
@@ -65,7 +66,7 @@ class TransmisionController extends Controller
             return response()->json(['message' => 'Hubo un problema al procesar la petición del dispositivo'], 422);
         }
 
-        $tipoActa = TipoActa::where('codigo', 'ALC')->first();
+        $tipoActa = TipoActa::where('codigo', TipoActaEnum::ALCALDIAS)->first();
 
         $buscarTransmision = ActaElectoral::where('id_junta_receptora', $request->id_junta_receptora)->first();
 
@@ -83,6 +84,41 @@ class TransmisionController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 500);
         }
+    }
+
+    public function almacenarTransmisionCongreso(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id_junta_receptora' => 'integer|required',
+            'id_centro_votacion' =>  'integer|required',
+            'sobrantes' =>  'integer|required',
+            'inutilizados' =>  'integer|required',
+            'impugnados' =>  'integer|required',
+            'nulos' =>  'integer|required',
+            'abstenciones' =>  'integer|required',
+            'escrutados' =>  'integer|required',
+            'faltantes' =>  'integer|required',
+            'entregados' =>  'integer|required',
+            'resultados' => 'array|required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $user = Auth::user();
+        $juntaReceptora = JuntasReceptoras::where('id', $request->id_junta_receptora)->first();
+        if (!$juntaReceptora) {
+            return response()->json(['message' => 'No se pudo procesar la petición solicitada'], 422);
+        }
+        $dispositivo = Dispositivos::where('id_usuario', $user->id)->where('id_centro_votacion', $juntaReceptora->id_centro_votacion)->first();
+
+        if (!$dispositivo) {
+            return response()->json(['message' => 'Hubo un problema al procesar la petición del dispositivo'], 422);
+        }
+
+        $tipoActa = TipoActa::where('codigo', TipoActaEnum::CONGRESO)->first();
+
+
     }
 
     public function verDetalleTransmision(Request $request, $idActa)

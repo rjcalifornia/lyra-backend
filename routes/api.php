@@ -52,4 +52,7 @@ Route::prefix('/v1/mobile/tranmisiones')->group(function () {
 
     Route::post('/alcaldes', [TransmisionController::class, 'almacenarTransmisionAlcaldes'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:crearTransmision, App\Models\ActaElectoral']);
+
+        Route::post('/congreso', [TransmisionController::class, 'almacenarTransmisionCongreso'])
+        ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:crearTransmision, App\Models\ActaElectoral']);
 });
