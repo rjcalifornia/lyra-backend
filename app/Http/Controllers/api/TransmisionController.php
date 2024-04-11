@@ -87,7 +87,7 @@ class TransmisionController extends Controller
 
     public function verDetalleTransmision(Request $request, $idActa)
     {
-        $acta = ActaElectoral::where('id', $idActa)->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->first();
+        $acta = ActaElectoral::with(['idJuntaReceptora', 'idCentroVotacion', 'idTipoActa', 'resultados'])->where('id', $idActa)->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->first();
 
         if(!$acta){
             return response()->json(['message' => 'No se pudo procesar la petición solicitada'], 422);
