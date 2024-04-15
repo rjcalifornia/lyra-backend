@@ -124,6 +124,15 @@ class TransmisionController extends Controller
             return response()->json(['message' => 'Datos ya han sido transmitidos anteriormente. Contacte al administrador'], 422);
         }
 
+        try {
+            $acta = new ActaElectoral;
+            $acta = $this->actaService->almacenarActa($acta, $request, $tipoActa, $user);
+            $this->actaService->almacenarVotos($acta, $request, $user);
+            return response()->json($acta, 201);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => $th], 500);
+        }
+
 
     }
 

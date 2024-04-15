@@ -53,21 +53,21 @@ class PartidoTipoEleccionSeeder extends Seeder
         PartidoTipoEleccion::create([
             'id_partido' => 1,
             'id_tipo_acta' => 2,
-            'municipio_id' => 1,
+            'departamento_id' => 1,
             'activo' => true,
             'usuario_crea' => 1,
         ]);
         PartidoTipoEleccion::create([
             'id_partido' => 2,
             'id_tipo_acta' => 2,
-            'municipio_id' => 1,
+            'departamento_id' => 1,
             'activo' => true,
             'usuario_crea' => 1,
         ]);
         PartidoTipoEleccion::create([
             'id_partido' => 3,
             'id_tipo_acta' => 2,
-            'municipio_id' => 1,
+            'departamento_id' => 1,
             'activo' => true,
             'usuario_crea' => 1,
         ]);
