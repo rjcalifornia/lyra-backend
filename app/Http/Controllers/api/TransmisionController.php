@@ -118,6 +118,12 @@ class TransmisionController extends Controller
 
         $tipoActa = TipoActa::where('codigo', TipoActaEnum::CONGRESO)->first();
 
+        $buscarTransmision = ActaElectoral::where('id_junta_receptora', $request->id_junta_receptora)->first();
+
+        if ($buscarTransmision) {
+            return response()->json(['message' => 'Datos ya han sido transmitidos anteriormente. Contacte al administrador'], 422);
+        }
+
 
     }
 
