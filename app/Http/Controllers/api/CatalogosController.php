@@ -31,10 +31,10 @@ class CatalogosController extends Controller
         return response()->json(['juntas_receptoras' => $juntasReceptoras], 200);
     }
 
-    public function obtenerCandidatos(Request $request, $idTipoEleccion)
+    public function obtenerCandidatos(Request $request, $idTipoActa)
     {
 
-        $tipoEleccion = TipoActa::where('id', $idTipoEleccion)->first();
+        $tipoEleccion = TipoActa::where('id', $idTipoActa)->first();
         if (!$tipoEleccion) {
             return response()->json(['message' => 'Hubo un error al procesar los datos'], 422);
         }

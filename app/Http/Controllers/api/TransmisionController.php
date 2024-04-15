@@ -35,8 +35,8 @@ class TransmisionController extends Controller
         return response()->json(['transmisiones' => $actas], 200);
     }
 
-    public function almacenarTransmisionAlcaldes(Request $request)
-    {
+
+    public function almacenarTransmision(Request $request, $idTipoActa){
         $validator = Validator::make($request->all(), [
             'id_junta_receptora' => 'integer|required',
             'id_centro_votacion' =>  'integer|required',
@@ -66,58 +66,12 @@ class TransmisionController extends Controller
             return response()->json(['message' => 'Hubo un problema al procesar la petición del dispositivo'], 422);
         }
 
-        $tipoActa = TipoActa::where('codigo', TipoActaEnum::ALCALDIAS)->first();
+        $tipoActa = TipoActa::where('id', $idTipoActa)->first();
 
-        $buscarTransmision = ActaElectoral::where('id_junta_receptora', $request->id_junta_receptora)->where('id_tipo_acta', $tipoActa->id)->first();
-
-        if ($buscarTransmision) {
-            return response()->json(['message' => 'Datos ya han sido transmitidos anteriormente. Contacte al administrador'], 422);
-        }
-
-
-        try {
-            $acta = new ActaElectoral;
-            $acta = $this->actaService->almacenarActa($acta, $request, $tipoActa, $user);
-            $this->actaService->almacenarVotos($acta, $request, $user);
-
-            return response()->json($acta, 201);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => $th], 500);
-        }
-    }
-
-    public function almacenarTransmisionCongreso(Request $request){
-        $validator = Validator::make($request->all(), [
-            'id_junta_receptora' => 'integer|required',
-            'id_centro_votacion' =>  'integer|required',
-            'sobrantes' =>  'integer|required',
-            'inutilizados' =>  'integer|required',
-            'impugnados' =>  'integer|required',
-            'nulos' =>  'integer|required',
-            'abstenciones' =>  'integer|required',
-            'escrutados' =>  'integer|required',
-            'faltantes' =>  'integer|required',
-            'entregados' =>  'integer|required',
-            'resultados' => 'array|required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $user = Auth::user();
-        $juntaReceptora = JuntasReceptoras::where('id', $request->id_junta_receptora)->first();
-        if (!$juntaReceptora) {
-            return response()->json(['message' => 'No se pudo procesar la petición solicitada'], 422);
-        }
-        $dispositivo = Dispositivos::where('id_usuario', $user->id)->where('id_centro_votacion', $juntaReceptora->id_centro_votacion)->first();
-
-        if (!$dispositivo) {
+        if (!$tipoActa) {
             return response()->json(['message' => 'Hubo un problema al procesar la petición del dispositivo'], 422);
         }
 
-        $tipoActa = TipoActa::where('codigo', TipoActaEnum::CONGRESO)->first();
-
         $buscarTransmision = ActaElectoral::where('id_junta_receptora', $request->id_junta_receptora)->where('id_tipo_acta', $tipoActa->id)->first();
 
         if ($buscarTransmision) {
@@ -132,8 +86,6 @@ class TransmisionController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 500);
         }
-
-
     }
 
     public function verDetalleTransmision(Request $request, $idActa)
