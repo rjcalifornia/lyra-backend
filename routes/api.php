@@ -39,7 +39,7 @@ Route::prefix('/v1/mobile/catalogos')->group(function () {
     Route::get('/juntas-receptoras', [CatalogosController::class, 'obtenerJuntasReceptoras'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verJuntasReceptoras, App\Models\JuntasReceptoras']);
 
-    Route::get('/partidos-politicos/{idTipoEleccion}', [CatalogosController::class, 'obtenerCandidatos'])
+    Route::get('/partidos-politicos/{idTipoActa}', [CatalogosController::class, 'obtenerCandidatos'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verPartidosPoliticos, App\Models\PartidosPoliticos']);
 });
 
@@ -47,6 +47,9 @@ Route::prefix('/v1/mobile/tranmisiones')->group(function () {
     Route::get('/', [TransmisionController::class, 'obtenerTransmisiones'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:listarTransmision, App\Models\ActaElectoral']);
 
-    Route::post('/alcaldes', [TransmisionController::class, 'almacenarTransmisionAlcaldes'])
+    Route::get('/{idActa}', [TransmisionController::class, 'verDetalleTransmision'])
+        ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:verTransmision, App\Models\ActaElectoral']);
+
+    Route::post('/{idTipoActa}', [TransmisionController::class, 'almacenarTransmision'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum', 'can:crearTransmision, App\Models\ActaElectoral']);
 });
