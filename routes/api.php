@@ -41,6 +41,8 @@ Route::prefix('/v1/mobile/catalogos')->group(function () {
 
     Route::get('/partidos-politicos/{idTipoActa}', [CatalogosController::class, 'obtenerCandidatos'])
         ->middleware([ValidacionDispositivo::class, 'auth:sanctum','can:verPartidosPoliticos, App\Models\PartidosPoliticos']);
+
+    Route::get('/elecciones', [CatalogosController::class, 'obtenerEleccionesDisponibles']);
 });
 
 Route::prefix('/v1/mobile/tranmisiones')->group(function () {

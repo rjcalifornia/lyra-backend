@@ -43,4 +43,10 @@ class CatalogosController extends Controller
 
         return response()->json(['candidatos' => $partidos], 200);
     }
+
+    public function obtenerEleccionesDisponibles(Request $request){
+        $elecciones = TipoActa::where('activo', true)->get();
+
+        return response()->json($elecciones, 200);
+    }
 }
