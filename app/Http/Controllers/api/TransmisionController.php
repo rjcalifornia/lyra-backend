@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Enums\TipoActaEnum;
 use App\Http\Controllers\Controller;
 use App\Models\ActaElectoral;
 use App\Models\Dispositivos;
@@ -17,22 +18,25 @@ class TransmisionController extends Controller
 {
     protected $actaService;
 
-    public function __construct(ActaService $actaService){
+    public function __construct(ActaService $actaService)
+    {
         $this->actaService = $actaService;
     }
-    public function obtenerTransmisiones(Request $request){
+    public function obtenerTransmisiones(Request $request)
+    {
 
         $actas = ActaElectoral::with([
-                                        'idJuntaReceptora', 'idCentroVotacion',
-                                        'idTipoActa', 'usuarioCrea',
-                                        'resultados.idPartido',
-                                        'resultados.usuarioCrea',
-                                    ])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
+            'idJuntaReceptora', 'idCentroVotacion',
+            'idTipoActa', 'usuarioCrea',
+            'resultados.idPartido',
+            'resultados.usuarioCrea',
+        ])->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->get();
 
-        return response()->json(['transmisiones'=> $actas], 200);
+        return response()->json(['transmisiones' => $actas], 200);
     }
 
-    public function almacenarTransmisionAlcaldes(Request $request){
+
+    public function almacenarTransmision(Request $request, $idTipoActa){
         $validator = Validator::make($request->all(), [
             'id_junta_receptora' => 'integer|required',
             'id_centro_votacion' =>  'integer|required',
@@ -53,35 +57,45 @@ class TransmisionController extends Controller
 
         $user = Auth::user();
         $juntaReceptora = JuntasReceptoras::where('id', $request->id_junta_receptora)->first();
-        if(!$juntaReceptora){
+        if (!$juntaReceptora) {
             return response()->json(['message' => 'No se pudo procesar la petición solicitada'], 422);
         }
         $dispositivo = Dispositivos::where('id_usuario', $user->id)->where('id_centro_votacion', $juntaReceptora->id_centro_votacion)->first();
 
-        if(!$dispositivo){
+        if (!$dispositivo) {
             return response()->json(['message' => 'Hubo un problema al procesar la petición del dispositivo'], 422);
         }
 
-        $tipoActa = TipoActa::where('codigo', 'ALC')->first();
+        $tipoActa = TipoActa::where('id', $idTipoActa)->first();
 
-        $buscarTransmision = ActaElectoral::where('id_junta_receptora', $request->id_junta_receptora)->first();
-
-        if($buscarTransmision){
-            return response()->json(['message' => 'Datos ya han sido transmitidos anteriormente. Contacte al administrador'], 422);
+        if (!$tipoActa) {
+            return response()->json(['message' => 'Hubo un problema al procesar la petición del dispositivo'], 422);
         }
 
+        $buscarTransmision = ActaElectoral::where('id_junta_receptora', $request->id_junta_receptora)->where('id_tipo_acta', $tipoActa->id)->first();
+
+        if ($buscarTransmision) {
+            return response()->json(['message' => 'Datos ya han sido transmitidos anteriormente. Contacte al administrador'], 422);
+        }
 
         try {
             $acta = new ActaElectoral;
             $acta = $this->actaService->almacenarActa($acta, $request, $tipoActa, $user);
             $this->actaService->almacenarVotos($acta, $request, $user);
-
             return response()->json($acta, 201);
-
         } catch (\Throwable $th) {
             return response()->json(['message' => $th], 500);
         }
+    }
 
+    public function verDetalleTransmision(Request $request, $idActa)
+    {
+        $acta = ActaElectoral::with(['idJuntaReceptora', 'idCentroVotacion', 'idTipoActa', 'resultados'])->where('id', $idActa)->where('id_centro_votacion', $request->dispositivo->id_centro_votacion)->first();
 
+        if(!$acta){
+            return response()->json(['message' => 'No se pudo procesar la petición solicitada'], 422);
+        }
+
+        return response()->json($acta, 200);
     }
 }
